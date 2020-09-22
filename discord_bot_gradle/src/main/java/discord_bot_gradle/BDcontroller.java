@@ -8,12 +8,13 @@ public class BDcontroller {
 	
 	private BDcontroller() {
 		
-		String url="jdbc:sqlite:/home/ubuntu/test.db";
+		String url="jdbc:sqlite:/home/ubuntu/tablasBot.db";
 		try {
 			con = DriverManager.getConnection(url);
 			
 		}catch(SQLException e) {
 			 System.out.println(e.getMessage());
+			 System.out.println("no estas conectado");
 		}
 	}
 	public static BDcontroller getInstance() {
@@ -24,15 +25,18 @@ public class BDcontroller {
 		
 	}
 	
-	public void insert(String name, int num) {
+	public void insert(long id, int num) {
 		try {
-			
-			Integer n=new Integer(num);
-			System.out.println(n);
-			PreparedStatement stmt=con.prepareStatement("INSERT INTO t1(name,num) VALUES(?,?);");
-			stmt.setString(1, name);
+			/*System.out.println("BDController");
+			System.out.println(id+"\n"+num);
+			System.out.println("aPS");*/
+			PreparedStatement stmt=con.prepareStatement("INSERT INTO enero(uuid,day) VALUES(?,?);");
+			//System.out.println("dPS");
+			stmt.setLong(1, id);
 			stmt.setInt(2, num);
+			//System.out.println("sigue siendo antes");
 			stmt.executeUpdate();
+			//System.out.println("noo falla el execute");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

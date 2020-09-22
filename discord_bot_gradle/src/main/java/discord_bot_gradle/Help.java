@@ -9,7 +9,7 @@ public class Help extends Command{
 		
 		
 		
-		MessageChannel channel=event.getChannel();//se puede borrar
+		//MessageChannel channel=event.getChannel();//se puede borrar
 		
 	}
 	

@@ -8,4 +8,10 @@ public class ping_command extends Command {
 		event.getChannel().sendMessage("funciona2").queue();
 		
 	}
+
+	@Override
+	public String help() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -14,10 +14,23 @@ public class mario_command extends Command{
 		/*for(int i=0;i<m.length;i++)
 			System.out.println(m[i]);*/
 		BDcontroller bd=BDcontroller.getInstance();
-		System.out.println(m[1]+"\n"+Integer.parseInt(m[2]));
-		bd.insert(m[1], Integer.parseInt(m[2]));
+		System.out.println(Integer.parseInt(m[1]));
+		long id=event.getAuthor().getIdLong();
+		bd.insert(id, Integer.parseInt(m[1]));
+	
+		event.getChannel().sendMessage("Hey "+event.getAuthor().getAsMention() +"ist your birthday").queue();
+		
+		
 		
 	}
+
+	@Override
+	public String help() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 	
 	
 
