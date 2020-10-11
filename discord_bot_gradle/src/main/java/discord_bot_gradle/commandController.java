@@ -10,8 +10,10 @@ public class commandController {
 	public commandController() {
 		mario_command m=new mario_command();
 		ping_command p=new ping_command();
+		Add a=new Add();
 		hsmp.put("mario",m);
 		hsmp.put("ping",p);
+		hsmp.put("add",a);
 	}
 
 	public Command searchCommand(String args) {

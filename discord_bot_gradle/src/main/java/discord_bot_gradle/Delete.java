@@ -6,9 +6,13 @@ public class Delete extends Command {
 
 	public void execute(MessageReceivedEvent event) {
 		
+		BDcontroller bd=BDcontroller.getInstance();
+		String user=event.getAuthor().getId();
+		bd.delete(user);
+		
 	}
 	
 	public String help() {
-		return "-rm	removes the birthday of the person you specify.\n "+"\tExample: bday rm mario sanchez\n ";
+		return "-rm	removes your birthday. Just type \"bday rm me\" ";
 	}
 }

@@ -16,7 +16,7 @@ public void onMessageReceived(MessageReceivedEvent event) {
 	String msg=event.getMessage().getContentRaw();
 	System.out.println(msg);
 
-	if( msg.charAt(0)=='!') {
+	if( msg.startsWith("bday")) {
 		String[] command=msg.split(" ");
 		
 		
@@ -24,10 +24,10 @@ public void onMessageReceived(MessageReceivedEvent event) {
 			System.out.println(command[i]);
 		}*/
 		
-		String f=command[0];
+		//String f=command[0];
 		//f.substring(1);
 		//System.out.println("entra en el if del chatList..."/*+ command.toString()*/);
-		Command c=cController.searchCommand(f.substring(1));
+		Command c=cController.searchCommand(command[1]);
 		//System.out.println("comando a buscar "+f.substring(1));
 		c.execute(event);
 		//String command=msg[1]; //podria ser un substract la primera posicion si hay varios comandos
