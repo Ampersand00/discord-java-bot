@@ -1,5 +1,12 @@
 package discord_bot_gradle;
+
 import java.sql.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class BDcontroller {
@@ -57,13 +64,34 @@ public class BDcontroller {
 		
 	}
 	
-	public void update(String user,String newDate /*int(?) newdate*/) {
+	public void update(String user,String newDate) {
 		try {
+			int nday= this.convertDateToInt(newDate);
 			PreparedStatement stmt=con.prepareStatement("UPDATE bday SET day=? WHERE name=?;");
+			stmt.setInt(1,nday);
+			stmt.setString(2, user);
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public int convertDateToInt(String dateString) {
+		Calendar c=Calendar.getInstance();
+		LocalDate current= LocalDate.now();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date date= dateFormat.parse("2011-"+dateString);
+			System.out.println("2011-"+date);
+			System.out.println(date.toString());
+			c.setTime(date);
+			System.out.println(c.get(Calendar.DAY_OF_YEAR));
+			
+		}catch(ParseException e) {
+				 e.printStackTrace();
+			 }
+		return c.get(Calendar.DAY_OF_YEAR);
 	}
 	
 	

@@ -1,22 +1,31 @@
 package discord_bot_gradle;
 
-import net.dv8tion.jda.api.entities.MessageChannel;
+import java.util.HashMap;
+
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Help extends Command{
+
 	
+	@Override
 	public void execute(MessageReceivedEvent event) {
+		EmbedBuilder eb=new EmbedBuilder();
+		String output="";
+		CommandController c=CommandController.getInstance();
+		HashMap<String,Command> h= c.getCommands();
 		
-		
-		
-		//MessageChannel channel=event.getChannel();//se puede borrar
-		
+		for(Command com : h.values()) {
+				output+=com.help();	
+		}
+		eb.setDescription(output);
+		event.getChannel().sendMessage(eb.build()).queue();
 	}
-	
+
+	@Override
 	public String help() {
-		String content="Try to help you out";
-		
-		return content;
+		return "\n-help Guess the porpouse of this command.\n ";
 	}
 
 }

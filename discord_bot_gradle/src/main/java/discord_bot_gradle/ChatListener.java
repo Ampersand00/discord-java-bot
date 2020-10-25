@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class ChatListener extends ListenerAdapter{
 	
-private commandController cController=new commandController();
+private CommandController cController=CommandController.getInstance();
 
 
 	

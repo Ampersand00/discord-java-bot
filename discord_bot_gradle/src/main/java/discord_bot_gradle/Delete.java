@@ -13,6 +13,6 @@ public class Delete extends Command {
 	}
 	
 	public String help() {
-		return "-rm	removes your birthday. Just type \"bday rm me\" ";
+		return "-rm	Removes your birthday. Just type \"bday rm me\"\n ";
 	}
 }
