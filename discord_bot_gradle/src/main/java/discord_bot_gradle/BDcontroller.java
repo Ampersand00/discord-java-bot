@@ -93,6 +93,11 @@ public class BDcontroller {
 			 }
 		return c.get(Calendar.DAY_OF_YEAR);
 	}
+	public String check(){
+		LocalDate currentTime=LocalTime.now();
+		System.Out.println(typeof(currentTime));
+		return null;
+	}
 	
 	
 }
