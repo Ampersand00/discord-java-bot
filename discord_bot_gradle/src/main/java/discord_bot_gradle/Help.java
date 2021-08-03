@@ -3,7 +3,7 @@ package discord_bot_gradle;
 import java.util.HashMap;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Message;
+//import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Help extends Command{

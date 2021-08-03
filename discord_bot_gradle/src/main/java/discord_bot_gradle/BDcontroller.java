@@ -5,6 +5,7 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+//import java.time.Year;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -18,7 +19,7 @@ public class BDcontroller {
 		
 		String url="jdbc:mariadb://localhost:3306/bot";
 		try {
-			con = DriverManager.getConnection(url,"root","root");
+			con = DriverManager.getConnection(url,"root","");
 			
 		}catch(SQLException e) {
 			 System.out.println(e.getMessage());
@@ -79,14 +80,16 @@ public class BDcontroller {
 	
 	public int convertDateToInt(String dateString) {
 		Calendar c=Calendar.getInstance();
-		LocalDate current= LocalDate.now();
+		//LocalDate current= LocalDate.now();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			Date date= dateFormat.parse("2011-"+dateString);
-			System.out.println("2011-"+date);
-			System.out.println(date.toString());
+			//int year=Year.now().getValue();
+			Date date= dateFormat.parse(dateString);
+			System.out.println("Convertede: "/*+String.valueOf(year)+"-"*/+dateString);
+			//System.out.println("2011-"+date);
+			//System.out.println(date.toString());
 			c.setTime(date);
-			System.out.println(c.get(Calendar.DAY_OF_YEAR));
+			//System.out.println(c.get(Calendar.DAY_OF_YEAR));
 			
 		}catch(ParseException e) {
 				 e.printStackTrace();
@@ -94,8 +97,30 @@ public class BDcontroller {
 		return c.get(Calendar.DAY_OF_YEAR);
 	}
 	public String check(){
-		LocalDate currentTime=LocalTime.now();
-		System.Out.println(typeof(currentTime));
+		String currentTime=LocalDate.now().toString();
+		//int year=Year.now().getValue();
+		PreparedStatement stmt;
+		System.out.println("check function: "+currentTime);
+		int cTime= this.convertDateToInt(currentTime);
+		try {
+			stmt = con.prepareStatement("SELECT * FROM bday;");
+			ResultSet resul=stmt.executeQuery();
+			
+			while(resul.next()) {
+				int day=resul.getInt(2);
+				String user= resul.getString(1);
+				System.out.println(day);
+				System.out.println(cTime);
+				if(day==cTime) {
+					return user;
+				} else return null;
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(currentTime.getClass());
 		return null;
 	}
 	
