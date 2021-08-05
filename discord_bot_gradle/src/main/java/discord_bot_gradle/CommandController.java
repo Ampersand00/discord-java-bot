@@ -13,11 +13,15 @@ public class CommandController {
 		Mod m=new Mod();
 		Delete d=new Delete();
 		Help h=new Help();
+		setMessage sm=new setMessage();
+		setChannel sc= new setChannel();
 		
 		hsmp.put("add",a);
 		hsmp.put("chg",m);
 		hsmp.put("rm",d);
 		hsmp.put("help",h);
+		hsmp.put("set channel", sc);
+		hsmp.put("set message", sm);
 	}
 	
 	public static CommandController getInstance() {

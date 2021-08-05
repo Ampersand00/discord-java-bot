@@ -17,9 +17,11 @@ public void onMessageReceived(MessageReceivedEvent event) {
 	System.out.println(msg);
 
 	if( msg.startsWith("bday")) {
-		String[] command=msg.split(" ");
-		
-		
+		String[] commandSplited=msg.split(" ");
+		String command="";
+		if(commandSplited.length>3)
+			command+= commandSplited[1]+ " " +commandSplited[2];
+		else command+=commandSplited[1];
 		/*for(int i=0; i<command.length;i++) {
 			System.out.println(command[i]);
 		}*/
@@ -27,9 +29,13 @@ public void onMessageReceived(MessageReceivedEvent event) {
 		//String f=command[0];
 		//f.substring(1);
 		//System.out.println("entra en el if del chatList..."/*+ command.toString()*/);
-		Command c=cController.searchCommand(command[1]);
+		Command c=cController.searchCommand(command);
+		if(c==null) {
+			EmbedMessage eb= new EmbedMessage("GOT YOU!","Foolish! You tried to blow me up, now fear my punishment...");
+			event.getChannel().sendMessage(eb.get().build()).queue();
+		}else 
 		//System.out.println("comando a buscar "+f.substring(1));
-		c.execute(event);
+			c.execute(event);
 		//String command=msg[1]; //podria ser un substract la primera posicion si hay varios comandos
 		/*switch(command) {
 		case "ping": {

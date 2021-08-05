@@ -4,10 +4,10 @@ import java.sql.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-//import java.time.Year;
+import java.time.Year;
 import java.util.Calendar;
 import java.util.Date;
+
 
 
 public class BDcontroller {
@@ -36,16 +36,11 @@ public class BDcontroller {
 	
 	public void insert(String id, int num) {
 		try {
-			/*System.out.println("BDController");
-			System.out.println(id+"\n"+num);
-			System.out.println("aPS");*/
+			
 			PreparedStatement stmt=con.prepareStatement("INSERT INTO bday(name,day) VALUES(?,?);");
-			//System.out.println("dPS");
 			stmt.setString(1, id);
 			stmt.setInt(2, num);
-			//System.out.println("sigue siendo antes");
 			stmt.executeUpdate();
-			//System.out.println("noo falla el execute");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,48 +75,31 @@ public class BDcontroller {
 	
 	public int convertDateToInt(String dateString) {
 		Calendar c=Calendar.getInstance();
-		//LocalDate current= LocalDate.now();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			//int year=Year.now().getValue();
-			Date date= dateFormat.parse(dateString);
-			System.out.println("Convertede: "/*+String.valueOf(year)+"-"*/+dateString);
-			//System.out.println("2011-"+date);
-			//System.out.println(date.toString());
+			int year=Year.now().getValue();
+			Date date= dateFormat.parse(year+"-"+dateString);
 			c.setTime(date);
-			//System.out.println(c.get(Calendar.DAY_OF_YEAR));
+			
 			
 		}catch(ParseException e) {
 				 e.printStackTrace();
 			 }
 		return c.get(Calendar.DAY_OF_YEAR);
 	}
-	public String check(){
-		String currentTime=LocalDate.now().toString();
-		//int year=Year.now().getValue();
+	public ResultSet search() {
 		PreparedStatement stmt;
-		System.out.println("check function: "+currentTime);
-		int cTime= this.convertDateToInt(currentTime);
 		try {
 			stmt = con.prepareStatement("SELECT * FROM bday;");
 			ResultSet resul=stmt.executeQuery();
-			
-			while(resul.next()) {
-				int day=resul.getInt(2);
-				String user= resul.getString(1);
-				System.out.println(day);
-				System.out.println(cTime);
-				if(day==cTime) {
-					return user;
-				} else return null;
-				
+			return resul;
 			}
-		} catch (SQLException e) {
+		 catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(currentTime.getClass());
 		return null;
+		// TODO Auto-generated method stub
 	}
 	
 	

@@ -12,10 +12,13 @@ public class Mod extends Command{
 		String content = event.getMessage().getContentRaw();
 		String newDate=content.substring(9);
 		bd.update(user,newDate);
+		EmbedMessage eb= new EmbedMessage("Hurray!!","The police can't catch you now");
+		event.getChannel().sendMessage(eb.get().build()).queue();
+		
 	}
 //en vez de una funcion podria ser un atributo final string
 	public String help() {
-		return "-chg Update your birthday date with the given new date.Remenber the format is MM-DD\n"+"\tExample: bday chg 11-31\n";
+		return "-**chg** Update your birthday date with the given new date.Remenber the format is *MM-DD*\n"+"> Example: `bday chg 11-31`\n";
 	}
 
 }

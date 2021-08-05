@@ -1,11 +1,8 @@
 package discord_bot_gradle;
 
-//import java.text.ParseException;
-//import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-//import java.util.Calendar;
-//import java.util.Date;
 
+
+import java.time.LocalDate;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Add extends Command{
@@ -34,10 +31,13 @@ public class Add extends Command{
 		
 		String uuid=event.getAuthor().getId();
 		bd.insert(uuid, current.getYear()%4==0?date+1:date);
+		EmbedMessage eb= new EmbedMessage("Your birthday was stored succesfully!","Apparently I'm still working");
+		event.getChannel().sendMessage(eb.get().build()).queue();
+
 		
 	}
 
 	public String help() {
-		return "-add Add a new birthday to the database.Please enter the name and the date following the example format  \n"+"\tExample: bday add mm-dd";
+		return "-**add:** Add a new birthday to the database.Please enter the name and the date following the example format  \n"+"> Example: bday add **MM-DD**";
 	}
 }
