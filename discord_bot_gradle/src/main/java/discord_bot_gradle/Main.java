@@ -40,10 +40,12 @@ public class Main extends ListenerAdapter{
         
         //ses.scheduleAtFixedRate(task1, delay, 24, TimeUnit.HOURS); 
         System.out.println("Main.......");
-        //ses.scheduleAtFixedRate(new Service(), 1, 24, TimeUnit.HOURS);
+        Service srv = new Service(jda,BDcontroller.getInstance());
+        srv.run();
+        ses.scheduleAtFixedRate(srv, 1, 24, TimeUnit.HOURS);
                 //break;
         	   
-        	  ses.scheduleAtFixedRate(new Service(), 10, 5, TimeUnit.SECONDS);
+        	  //ses.scheduleAtFixedRate(new Service(jda), 10, 5, TimeUnit.SECONDS);
             
    
 

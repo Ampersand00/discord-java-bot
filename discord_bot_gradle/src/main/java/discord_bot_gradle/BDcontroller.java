@@ -5,19 +5,20 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-
+//TODO rediseñar ka base de datos par que guarde el canal y server donde tiene que lanzar las notificaciones 
+//TODO configurar para que la conexión a la bd sea parametrizable (pasarle la uri de conexión)
 
 public class BDcontroller {
 
 	 private Connection con=null;
-	 private static BDcontroller instancia=null;
 	
-	private BDcontroller() {
+	private BDcontroller(String url) {
 		
-		String url="jdbc:mariadb://localhost:3306/bot";
+		//String url="jdbc:mariadb://localhost:3306/bot";
 		try {
 			con = DriverManager.getConnection(url,"root","");
 			
@@ -26,13 +27,7 @@ public class BDcontroller {
 			 System.out.println("no estas conectado");
 		}
 	}
-	public static BDcontroller getInstance() {
-		if(instancia==null) {
-			instancia=new BDcontroller();
-		}
-		return instancia;
-		
-	}
+
 	
 	public void insert(String id, int num) {
 		try {
@@ -87,18 +82,30 @@ public class BDcontroller {
 			 }
 		return c.get(Calendar.DAY_OF_YEAR);
 	}
-	public ResultSet search() {
+	public ArrayList<Bday> searchBdays(int cTime) {
 		PreparedStatement stmt;
+		ArrayList<Bday> bdayList= new ArrayList<>();
 		try {
-			stmt = con.prepareStatement("SELECT * FROM bday;");
+			stmt = con.prepareStatement("SELECT * FROM bday WHERE day=?;");
+			stmt.setInt(0, cTime);
 			ResultSet resul=stmt.executeQuery();
-			return resul;
+			try {
+				
+				while(resul.next()) {
+						System.out.println(resul.toString());
+						bdayList.add(new Bday().initializeStar(resul));
+				}
+				return bdayList;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} return new ArrayList<>();
 			}
 		 catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return new ArrayList<>();
 		// TODO Auto-generated method stub
 	}
 	

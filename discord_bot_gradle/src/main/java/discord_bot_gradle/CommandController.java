@@ -1,7 +1,7 @@
 package discord_bot_gradle;
 
 import java.util.HashMap;
-//sugerenia: hacer esto singletone tambien 
+
 
 public class CommandController {
 	
@@ -31,7 +31,7 @@ public class CommandController {
 		return instancia;
 	}
 	
-	public HashMap getCommands() {
+	public HashMap<String,Command> getCommands() {
 		return hsmp;
 	}
 
