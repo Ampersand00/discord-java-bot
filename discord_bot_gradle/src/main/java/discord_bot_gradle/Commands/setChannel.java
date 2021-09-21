@@ -15,13 +15,11 @@ public class setChannel extends Command {
 
 	@Override
 	public void execute(MessageReceivedEvent event) {
-		String msg=event.getMessage().getContentRaw();
-		String[] m=msg.split(" ");
+		String[] m= splitMessage(event);
 		String channel = m[3];
-		Long longChannel= new Long(channel);
+		Long longChannel=event.getGuild().getTextChannelsByName(channel, true).get(0).getIdLong();
 		Long guild = event.getGuild().getIdLong();
 		bd.setChanel(longChannel,guild);
-		//srv.setChannel(m[2]);
 		EmbedMessage eb= new EmbedMessage("Done!"," ");
 		event.getChannel().sendMessage(eb.get().build()).queue();
 	}
@@ -29,7 +27,7 @@ public class setChannel extends Command {
 	@Override
 	public String help() {
 		
-		return "-**set channel** [name]: allows you to set in which channel should the bot send the notifications";
+		return "-**set channel** [name]: allows you to set in which channel should the bot send the notifications\n" + ">  Example: `bday set channel general`\n";
 	}
 
 }

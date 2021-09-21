@@ -15,7 +15,7 @@ public class Delete extends Command {
 	public void execute(MessageReceivedEvent event) {
 		
 		
-		String user=event.getAuthor().getId();
+		long user=event.getAuthor().getIdLong();
 		bd.delete(user);
 		EmbedMessage eb= new EmbedMessage("Now you dont exist anymore","Such a shame, I loved sharing all of your data with facebook ;_;");
 		event.getChannel().sendMessage(eb.get().build()).queue();

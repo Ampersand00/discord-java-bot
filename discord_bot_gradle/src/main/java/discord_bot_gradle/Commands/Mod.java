@@ -15,7 +15,7 @@ public class Mod extends Command{
 	}
 	public void execute(MessageReceivedEvent event) {
 		
-		String user=event.getAuthor().getId();
+		long user=event.getAuthor().getIdLong();
 		String content = event.getMessage().getContentRaw();
 		String newDate=content.substring(9);
 		int nday= Command.convertDateToInt(newDate);
@@ -24,7 +24,7 @@ public class Mod extends Command{
 		event.getChannel().sendMessage(eb.get().build()).queue();
 		
 	}
-//en vez de una funcion podria ser un atributo final string
+
 	public String help() {
 		return "-**chg** Update your birthday date with the given new date.Remenber the format is *MM-DD*\n"+">  Example: `bday chg 11-31`\n";
 	}
