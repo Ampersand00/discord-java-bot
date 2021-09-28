@@ -16,8 +16,10 @@ public class seeMessage extends Command {
 		String[] m= splitMessage(event);
 		long name= new Long(m[3].substring(3, m[3].length()-1)).longValue();
 		System.out.println(name);
-		String s= bd.selectMessage(name);
-		System.out.println("Consuklta: "+ s);
+		String s= bd.selectMessage(name,event.getGuild().getIdLong());
+		if(s==null|| s.isEmpty()|| s.isBlank()) {
+			s+= "<@"+name+">"+ "has no message, does anybody care about them?";
+		}
 		EmbedMessage eb= new EmbedMessage("-_-",s);
 		event.getChannel().sendMessage(eb.get().build()).queue();
 		
@@ -25,7 +27,7 @@ public class seeMessage extends Command {
 
 	@Override
 	public String help() {
-		return "-**ls message** [name]: allows you to see the mesage set for the name you entered\n" + ">  Example: `bday ls message @Jimmy`\n";
+		return "-**ls message** [name]: allows you to see the message set for the name you entered\n" + ">  Example: `bday ls message @Jimmy`\n";
 	}
 
 }

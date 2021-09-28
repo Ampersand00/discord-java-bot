@@ -36,7 +36,7 @@ public class Add extends Command {
 	}
 
 	public String help() {
-		return "-**add:** Add a new birthday to the database.Please enter the name and the date following the example format.  \n"
+		return "-**add:** Add a new birthday to the database. Please enter the name and the date following the example format.  \n"
 				+ ">  Example: `bday add **MM-DD**`";
 	}
 }

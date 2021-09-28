@@ -30,7 +30,7 @@ public class SelectAll extends Command {
 
 	@Override
 	public String help() {
-		return "-**all**: shows all the birthdays of this server.The day format is the same as when you add a birthday\n";
+		return "-**list**: shows all the birthdays of this server.The day format is the same as when you add a birthday\n";
 	}
 
 }

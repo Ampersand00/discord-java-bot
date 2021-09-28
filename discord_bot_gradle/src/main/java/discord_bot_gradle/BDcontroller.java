@@ -37,15 +37,58 @@ public class BDcontroller {
 
 	}
 
-	public void delete(long user) {
+	public void delete(long user,long server) {
+			if(areNmembersOfGuild(server)) {
+				remove(user,server);
+			}
+			else {
+				remove(user,server);
+				updateServers(server);
+			}
+	}
+
+	private void updateServers(long server) {
+		PreparedStatement stmt;
 		try {
-			PreparedStatement stmt = con.prepareStatement("DELETE FROM users WHERE name=?;");
-			stmt.setLong(1, user);
+			stmt = con.prepareStatement("DELETE FROM servers WHERE id=?;");
+			stmt.setLong(1, server);
 			stmt.executeUpdate();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		
+	}
+
+	private void remove(long user, long server) {
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement("DELETE FROM users WHERE name=? AND server=?;");
+			stmt.setLong(1, user);
+			stmt.setLong(2, server);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
+
+	private boolean areNmembersOfGuild(long server) {
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT COUNT(name) FROM users WHERE server=?;");
+			stmt.setLong(1, server);
+			ResultSet resul=stmt.executeQuery();
+			while(resul.next()) {
+				if(resul.getInt(1)>1) {
+					return true;
+				}
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		return false;
 	}
 
 	public void update(long user, int newDay) {
@@ -118,12 +161,17 @@ public class BDcontroller {
 
 	}
 
-	public void setMessage(long name, String message) {
+	public void setMessage(long name, String message,long server) {
 		PreparedStatement stmt;
+		
 		try {
-			stmt = con.prepareStatement("UPDATE users SET message=? WHERE name=?;");
+			System.out.println("[BDcontroler: setMessage] "+message);
+			System.out.println("[BDcontroler: setMessage] server "+ server);
+			System.out.println("[BDcontroler: setMessage] name  "+ name);
+			stmt = con.prepareStatement("UPDATE users SET message=? WHERE server=? AND name=?;");
 			stmt.setString(1, message);
-			stmt.setLong(2, name);
+			stmt.setLong(2, server);
+			stmt.setLong(3, name);
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -162,23 +210,49 @@ public class BDcontroller {
 		}
 	}
 
-	public String selectMessage(long name) {
+	public String selectMessage(long name,long server) {
 		System.out.println("[BDcontroller : selectMessage] llamada recibida ");
+		System.out.println(name);
 		String result = "";
 		PreparedStatement stmt;
 		try {
-			stmt = con.prepareStatement("SELECT message FROM users WHERE name=?");
-			System.out.println("alkjhfkjlahgljk");
+			stmt = con.prepareStatement("SELECT message FROM users WHERE name=? AND server=?");
 			stmt.setLong(1, name);
-			System.out.println("aaaaaaaaaaaaaaaaaaaaaa");
+			stmt.setLong(2, server);
 			ResultSet resultQuery = stmt.executeQuery();
-			System.out.println("[BDcontroller : selectMessage] " + resultQuery.getString(1));
-			result += resultQuery.getString(1);
+			System.out.println("queryjhañk");
+			System.out.println("ResultDO consulta antes"+result);
+			while(resultQuery.next()) {
+				result += resultQuery.getString(1);
+			}
+			System.out.println("ResultDO consulta"+result);
 			return result;
 		} catch (SQLException e) {
 
 		}
-		return null;
+		return "";
+	}
+
+	public boolean hasBday(long name,long server) {
+		boolean hasBday=false;
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement("SELECT COUNT(*) FROM users WHERE name=? AND server=?");
+			stmt.setLong(1, name);
+			stmt.setLong(2, server);
+			ResultSet resultQuery = stmt.executeQuery();
+			
+			while(resultQuery.next()) {
+				if(resultQuery.getInt(1)==1) {
+					hasBday=true;
+				}
+			}
+			
+			return hasBday;
+		} catch (SQLException e) {
+
+		}
+		return hasBday;
 	}
 
 	/*

@@ -40,7 +40,7 @@ public class ChatListener extends ListenerAdapter {
 		cController.getBD().insertServers(event.getGuild().getIdLong(),
 				event.getGuild().getDefaultChannel().getIdLong());
 		event.getGuild().getDefaultChannel().sendMessage(
-				new EmbedMessage("Manoli's bdays has joined the server!", "Your lord has arrived, now start worship me")
+				new EmbedMessage("Manoli's bdays has joined the server!", "Your lord has arrived, now start worshipping me. Run `bday help` for more information.")
 						.get().build())
 				.queue();
 	}
