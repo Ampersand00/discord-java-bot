@@ -1,4 +1,4 @@
-package discord_bot_gradle;
+package discord_bot_gradle.Models;
 
 public class Server {
 	private long id;

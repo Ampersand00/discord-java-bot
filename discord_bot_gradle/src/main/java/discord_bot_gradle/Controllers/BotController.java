@@ -1,4 +1,6 @@
-package discord_bot_gradle;
+package discord_bot_gradle.Controllers;
+
+import discord_bot_gradle.Notifier;
 
 public class BotController {
 	private CommandController commandC;

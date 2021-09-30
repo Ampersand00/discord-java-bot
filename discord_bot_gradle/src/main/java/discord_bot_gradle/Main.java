@@ -12,6 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 import javax.security.auth.login.LoginException;
 
+import discord_bot_gradle.Controllers.BDcontroller;
+import discord_bot_gradle.Controllers.CommandController;
+
 //import net.dv8tion.jda.api.AccountType;
 
 public class Main extends ListenerAdapter {

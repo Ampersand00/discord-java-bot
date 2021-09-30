@@ -1,4 +1,4 @@
-package discord_bot_gradle;
+package discord_bot_gradle.Models;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,6 +6,7 @@ import java.time.Year;
 import java.util.Calendar;
 import java.util.Date;
 
+import discord_bot_gradle.Controllers.BDcontroller;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public abstract class Command {

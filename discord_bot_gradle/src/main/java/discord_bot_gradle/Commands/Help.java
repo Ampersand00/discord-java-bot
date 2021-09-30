@@ -3,9 +3,9 @@ package discord_bot_gradle.Commands;
 import java.awt.Color;
 import java.util.HashMap;
 
-import discord_bot_gradle.BDcontroller;
-import discord_bot_gradle.Command;
-import discord_bot_gradle.CommandController;
+import discord_bot_gradle.Controllers.BDcontroller;
+import discord_bot_gradle.Controllers.CommandController;
+import discord_bot_gradle.Models.Command;
 import net.dv8tion.jda.api.EmbedBuilder;
 //import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

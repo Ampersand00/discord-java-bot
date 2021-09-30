@@ -1,8 +1,8 @@
 package discord_bot_gradle.Commands;
 
-import discord_bot_gradle.BDcontroller;
-import discord_bot_gradle.Command;
-import discord_bot_gradle.EmbedMessage;
+import discord_bot_gradle.Controllers.BDcontroller;
+import discord_bot_gradle.Models.Command;
+import discord_bot_gradle.Models.EmbedMessage;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class seeMessage extends Command {
@@ -14,7 +14,7 @@ public class seeMessage extends Command {
 	@Override
 	public void execute(MessageReceivedEvent event) {
 		String[] m= splitMessage(event);
-		long name= new Long(m[3].substring(3, m[3].length()-1)).longValue();
+		long name= new Long(m[2].substring(3, m[2].length()-1)).longValue();
 		System.out.println(name);
 		String s= bd.selectMessage(name,event.getGuild().getIdLong());
 		if(s==null|| s.isEmpty()|| s.isBlank()) {
@@ -27,7 +27,7 @@ public class seeMessage extends Command {
 
 	@Override
 	public String help() {
-		return "-**ls message** [name]: allows you to see the message set for the name you entered\n" + ">  Example: `bday ls message @Jimmy`\n";
+		return "-**show** [name]: allows you to see the message set for the name you entered\n" + ">  Example: `bday show @Jimmy`\n";
 	}
 
 }

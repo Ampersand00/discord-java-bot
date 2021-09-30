@@ -1,4 +1,4 @@
-package discord_bot_gradle;
+package discord_bot_gradle.Controllers;
 
 import java.util.HashMap;
 
@@ -10,6 +10,7 @@ import discord_bot_gradle.Commands.SelectAll;
 import discord_bot_gradle.Commands.seeMessage;
 import discord_bot_gradle.Commands.setChannel;
 import discord_bot_gradle.Commands.setMessage;
+import discord_bot_gradle.Models.Command;
 
 
 public class CommandController {
@@ -35,7 +36,7 @@ public class CommandController {
 		hsmp.put("set channel", sc);
 		hsmp.put("set message", sm);
 		hsmp.put("list", sa);
-		hsmp.put("ls message", lsm);
+		hsmp.put("show", lsm);
 	}
 	
 	public HashMap<String,Command> getCommands() {

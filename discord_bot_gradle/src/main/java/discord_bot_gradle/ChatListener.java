@@ -1,5 +1,8 @@
 package discord_bot_gradle;
 
+import discord_bot_gradle.Controllers.CommandController;
+import discord_bot_gradle.Models.Command;
+import discord_bot_gradle.Models.EmbedMessage;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -21,9 +24,10 @@ public class ChatListener extends ListenerAdapter {
 			String command = "";
 			if (commandSplited.length > 3)
 				command += commandSplited[1] + " " + commandSplited[2];
-			else
+			else if(commandSplited.length<3)
 				command += commandSplited[1];
-
+			else 
+				command=commandSplited[1];
 			Command c = cController.searchCommand(command);
 			if (c == null) {
 				EmbedMessage eb = new EmbedMessage("GOT YOU!",

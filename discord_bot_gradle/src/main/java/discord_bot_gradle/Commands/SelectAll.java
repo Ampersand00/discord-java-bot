@@ -2,10 +2,10 @@ package discord_bot_gradle.Commands;
 
 import java.util.ArrayList;
 
-import discord_bot_gradle.BDcontroller;
-import discord_bot_gradle.Bday;
-import discord_bot_gradle.Command;
-import discord_bot_gradle.EmbedMessage;
+import discord_bot_gradle.Controllers.BDcontroller;
+import discord_bot_gradle.Models.Bday;
+import discord_bot_gradle.Models.Command;
+import discord_bot_gradle.Models.EmbedMessage;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class SelectAll extends Command {

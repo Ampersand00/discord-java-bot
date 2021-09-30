@@ -1,8 +1,11 @@
-package discord_bot_gradle;
+package discord_bot_gradle.Controllers;
 
 import java.sql.*;
 
 import java.util.ArrayList;
+
+import discord_bot_gradle.Models.Bday;
+import discord_bot_gradle.Models.Server;
 
 public class BDcontroller {
 
